@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,7 +60,7 @@ public class ProductServiceTest {
 	@Test
 	@DisplayName("save-product-test")
 	public void given_Product_To_Save_Should_Return_Saved_Product() throws ProductAlreadyExistsException {
-		when(prodRepo.findByName(any())).thenReturn(null);
+		when(prodRepo.findByName(any())).thenReturn(Optional.empty());
 		when(prodRepo.save(any())).thenReturn(prod1);
 		Product savedProduct = prodService.saveProduct(prod1);
 		assertNotNull(savedProduct);
