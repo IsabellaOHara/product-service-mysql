@@ -2,6 +2,7 @@ package com.qa.product.service;
 
 import java.util.List;
 
+import com.qa.product.dto.ProductDTO;
 import com.qa.product.entity.Product;
 import com.qa.product.exception.ProductAlreadyExistsException;
 import com.qa.product.exception.ProductNotFoundException;
@@ -15,5 +16,5 @@ public interface IProductService {
 	public Product updateProduct(Product product) throws ProductNotFoundException;
 	public boolean deleteProductById(int id) throws ProductNotFoundException;
 	
-	
+	public List<ProductDTO> findProductDetailsWithDTO();
 }

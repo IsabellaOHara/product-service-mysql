@@ -27,12 +27,12 @@ public class Product {
 	private int id;
 	
 	@NotNull
-	@Pattern(regexp = "^[A-Za-z0-9]*", message = "Invalid name, must only contain alphanumeric characters")
+//	@Pattern(regexp = "^[A-Za-z0-9]*", message = "Invalid name, must only contain alphanumeric characters")
 	@Column(name = "product_name")
 	private String name;
 	
 	@NotNull
-	@Pattern(regexp = "([0-9]\\d{10}+)\\.([0-9]\\d{2})$", message = "Invalid price")
+//	@Pattern(regexp = "([0-9]\\d{10}+)\\.([0-9]\\d{2})$", message = "Invalid price")
 	@Column(name = "product_price")
 	private double price;
 	

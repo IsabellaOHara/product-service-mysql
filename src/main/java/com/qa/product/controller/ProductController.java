@@ -46,7 +46,7 @@ public class ProductController {
 		return new ResponseEntity<>(this.prodService.getAllProduct(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/employee/{id}")
+	@GetMapping("/product/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable("id") int id) throws ProductNotFoundException {
 		Product product;
 		try {
@@ -57,7 +57,7 @@ public class ProductController {
 		return responseEntity;
 	}
 	
-	@PutMapping("/employee")
+	@PutMapping("/product")
 	public ResponseEntity<?> updateProduct(@RequestBody Product product) throws ProductNotFoundException {
 		try {
 			responseEntity = new ResponseEntity<>(prodService.updateProduct(product), HttpStatus.OK);
@@ -67,7 +67,7 @@ public class ProductController {
 		return responseEntity;
 	}
 	
-	@DeleteMapping("/employee")
+	@DeleteMapping("/product")
 	public ResponseEntity<?> deleteProductById(@RequestParam("id") int id) throws ProductNotFoundException {
 		boolean status;
 		try {
@@ -77,6 +77,11 @@ public class ProductController {
 			throw e;
 		}
 		return responseEntity;
+	}
+	
+	@GetMapping("/product/dto-details")
+	public ResponseEntity<?> getProductDTODetails() {
+		return new ResponseEntity<>(prodService.findProductDetailsWithDTO(), HttpStatus.OK);
 	}
 	
 }

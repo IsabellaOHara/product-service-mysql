@@ -2,10 +2,13 @@ package com.qa.product.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.qa.product.dto.ProductDTO;
 import com.qa.product.entity.Product;
 import com.qa.product.exception.ProductAlreadyExistsException;
 import com.qa.product.exception.ProductNotFoundException;
@@ -17,6 +20,9 @@ public class ProductService implements IProductService {
 	@Autowired
 	ProductRepository prodRepo;
 
+	@Autowired
+	ModelMapper modelMapper;
+	
 	@Override
 	public Product saveProduct(Product product) throws ProductAlreadyExistsException {
 		Optional<Product> findByName = prodRepo.findByName(product.getName());
@@ -69,6 +75,15 @@ public class ProductService implements IProductService {
 			status = true;
 		}
 		return status;
+	}
+
+	@Override
+	public List<ProductDTO> findProductDetailsWithDTO() {
+		return this.prodRepo.findAll().stream().map(this::mapToProductDTO).collect(Collectors.toList());
+	}
+	
+	private ProductDTO mapToProductDTO(Product product) {
+		return this.modelMapper.map(product,  ProductDTO.class);
 	}
 
 }
